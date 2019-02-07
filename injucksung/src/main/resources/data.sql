@@ -106,8 +106,8 @@ VALUES (4, 8, 2, 6, 6, 4, 5);
 -- 문제 PDF파일 업로드, 문제 정보입력
 
 -- 시험기록
-INSERT INTO quiz_record (user_id, date, correct_count, total_count, time, title)
-VALUES (2, now(), 2, 3, 600, '위포트 언어 유의어 영역');
+INSERT INTO quiz_record (user_id, date, correct_count, total_count, is_done, title)
+VALUES (2, now(), 2, 3, 0, '위포트 언어 유의어 영역');
 -- 시험기록 끝
 
 -- result

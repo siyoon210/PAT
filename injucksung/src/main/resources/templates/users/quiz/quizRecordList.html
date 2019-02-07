@@ -18,7 +18,7 @@
                         <th>응시한 시간</th>
                         <th>맞춘갯수</th>
                         <th>총 갯수</th>
-                        <th>시간</th>
+                        <th>완료 여부</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,7 +28,7 @@
                         <td th:text="${quizRecord.date}"></td>
                         <td th:text="${quizRecord.correctCount}"></td>
                         <td th:text="${quizRecord.totalCount}"></td>
-                        <td th:text="${quizRecord.time}"></td>
+                        <td th:text="${quizRecord.done}"></td>
                     </tr>
                     </tbody>
                 </table>
