@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
 @EqualsAndHashCode
-public class Role {
+public class
+Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

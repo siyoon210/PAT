@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static com.injucksung.injucksung.repository.Print.print;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.AdditionalMatchers.not;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -41,7 +43,8 @@ public class BookContentRepositoryTest {
         Long superBookContentId = 4L;
         int maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceBySuperBookContentId(superBookContentId);
         //bookid가 1이고 뎁스가 1인 경우의 sequnece 최대값은 2 (샘플데이터 기준)
-        Assert.assertEquals(2, maxSequenceByBookIdAndDepth);
+//        Assert.assertEquals(2, maxSequenceByBookIdAndDepth);
+        Assert.assertThat(maxSequenceByBookIdAndDepth, is(2));
     }
 
 }
