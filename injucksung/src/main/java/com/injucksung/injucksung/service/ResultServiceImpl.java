@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -39,6 +41,23 @@ public class ResultServiceImpl implements ResultService {
                     .build());
         }
 
+        return resultRepository.saveAll(results);
+    }
+
+    @Override
+    public List<Result> addResult(Long[] bookContentIds, QuizRecord quizRecord) {
+        List<Result> results = new ArrayList<>();
+        List<Question> questions = questionRepository.findQuestionByBookContentId(bookContentIds);
+
+        for (Question question : questions) {
+            results.add(
+                    Result.builder()
+                            .isCorrect(false)
+                            .checkedChoice(0)
+                            .question(question)
+                            .quizRecord(quizRecord)
+                            .build());
+        }
         return resultRepository.saveAll(results);
     }
 

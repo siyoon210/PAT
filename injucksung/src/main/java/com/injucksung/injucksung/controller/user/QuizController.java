@@ -28,18 +28,18 @@ public class QuizController {
     //문제 리스트 가져오기
     @GetMapping
     public String getQuestionList(@ModelAttribute SelectedBookContentForQuizForm selectedBookContentForQuizForm,
-                                        Model model) {
+                                  Model model) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
         String viewName = null;
-        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")){
+        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) {
             //세션에 저장된 스프링 시큐리티 정보로 CustomUserDetails 가져오기
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             QuizRecord quizRecord = quizRecordService.addQuizRecord(selectedBookContentForQuizForm.getBookContentIds(), userDetails);
+            resultService.addResult(selectedBookContentForQuizForm.getBookContentIds(), quizRecord);
 
             viewName = "/users/quiz/solving";
-        }
-        else{
+        } else {
             model.addAttribute("questions", questionService.getQuestionList(selectedBookContentForQuizForm));
             model.addAttribute("bookContentCount", selectedBookContentForQuizForm.getBookContentIds().length);
             viewName = "/users/quiz/grading";
