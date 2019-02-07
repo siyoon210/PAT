@@ -29,7 +29,7 @@ public class QuizRecord {
     private int totalCount;//전체 문제 문항수
 
     @Column(nullable = false)
-    private int time; //실제 걸린 시간 (단위 초)
+    private boolean isDone; //모든 문항을 풀었는지
 
     @Column (nullable = false)
     private String title;
