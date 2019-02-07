@@ -29,17 +29,19 @@ public class QuizController {
 
     //문제 리스트 가져오기
     @GetMapping
-    public ModelAndView getQuestionList(@ModelAttribute SelectedBookContentForQuizForm selectedBookContentForQuizForm,
-                                        ModelAndView modelAndView) {
+    public String getQuestionList(@ModelAttribute SelectedBookContentForQuizForm selectedBookContentForQuizForm,
+                                        Model model) {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
-
-        List<Question> questions = questionService.getQuestionList(selectedBookContentForQuizForm);
-
-        modelAndView.addObject("questions", questions);
-        modelAndView.addObject("bookContentCount", selectedBookContentForQuizForm.getBookContentIds().length);
-        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")) modelAndView.setViewName("/users/quiz/solving");
-        else modelAndView.setViewName("/users/quiz/grading");
-        return modelAndView;
+        String viewName = null;
+        if (selectedBookContentForQuizForm.getAction().equals("문제풀기")){
+            viewName = "/users/quiz/solving";
+        }
+        else{
+            model.addAttribute("questions", questionService.getQuestionList(selectedBookContentForQuizForm));
+            model.addAttribute("bookContentCount", selectedBookContentForQuizForm.getBookContentIds().length);
+            viewName = "/users/quiz/grading";
+        }
+        return viewName;
     }
 
     //퀴즈 종료 후 결과
