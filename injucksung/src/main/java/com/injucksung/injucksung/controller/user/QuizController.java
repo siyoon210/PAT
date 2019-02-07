@@ -1,6 +1,5 @@
 package com.injucksung.injucksung.controller.user;
 
-import com.injucksung.injucksung.domain.Question;
 import com.injucksung.injucksung.domain.QuizRecord;
 import com.injucksung.injucksung.domain.Result;
 import com.injucksung.injucksung.dto.SelectedBookContentForQuizForm;
@@ -14,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +32,11 @@ public class QuizController {
         // TODO: checkbox를 하나도 선택 안한 경우의 예외처리
         String viewName = null;
         if (selectedBookContentForQuizForm.getAction().equals("문제풀기")){
+            //세션에 저장된 스프링 시큐리티 정보로 CustomUserDetails 가져오기
+            CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            QuizRecord quizRecord = quizRecordService.addQuizRecord(selectedBookContentForQuizForm.getBookContentIds(), userDetails);
+
             viewName = "/users/quiz/solving";
         }
         else{
@@ -52,7 +55,7 @@ public class QuizController {
         //세션에 저장된 스프링 시큐리티 정보로 CustomUserDetails 가져오기
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        QuizRecord quizRecord = quizRecordService.addQuizRecordService(submittedQuizInfoDto, userDetails);
+        QuizRecord quizRecord = quizRecordService.addQuizRecord(submittedQuizInfoDto, userDetails);
         List<Result> results = resultService.addResult(submittedQuizInfoDto, quizRecord);
 
         model.addAttribute("quizRecord", quizRecord);
