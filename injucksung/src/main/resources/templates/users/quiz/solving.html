@@ -13,16 +13,17 @@
             <span th:text="${question.bookContent.book.name}">책 이름</span><br>
             <span th:text="${question.bookContent.name}">책 목차 이름</span><br>
             <span th:text="${question.bookNumber}+'번 문제'"></span><br>
-            <form>
+            <form method="POST" th:action="'/quiz/'+${result.id}">
                 <input type="hidden" th:value="${result.id}"/>
                 <div>
-                    <input type="radio" th:name="${question.id}" th:value="1" required/>1
-                    <input type="radio" th:name="${question.id}" th:value="2" required/>2
-                    <input type="radio" th:name="${question.id}" th:value="3" required/>3
-                    <input type="radio" th:name="${question.id}" th:value="4" required/>4
-                    <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"
+                    <input type="radio" th:name="checkedChoice" th:value="1" required/>1
+                    <input type="radio" th:name="checkedChoice" th:value="2" required/>2
+                    <input type="radio" th:name="checkedChoice" th:value="3" required/>3
+                    <input type="radio" th:name="checkedChoice" th:value="4" required/>4
+                    <input type="radio" th:if="${question.choiceCount}==5" th:name="checkedChoice" th:value="5"
                            required(/>5
                 </div>
+                <input type="submit" value="다음 문제">
             </form>
         </div>
     </div>

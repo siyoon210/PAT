@@ -28,7 +28,7 @@ public class QuizRecordController {
 
     //결과 페이지 한건 가져오기
     @GetMapping("/{quizRecordId}")
-    public String getResult(@PathVariable Long userId, @PathVariable Long quizRecordId,
+    public String getResult(@PathVariable Long quizRecordId,
                             Model model) {
         model.addAttribute("results", resultService.getResults(quizRecordId));
         return "/users/quiz/result";

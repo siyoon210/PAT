@@ -67,7 +67,8 @@ public class QuizController {
 
     //문제풀기 한문제 제출하기
     @PostMapping("/{resultId}")
-    public String checkQuestion(@RequestParam Long resultId, @RequestParam int checkedChoice){
+    public String checkQuestion(@RequestParam("checkedChoice") int checkedChoice, @PathVariable Long resultId) {
+        
         return "/users/quiz/solving";
     }
 
