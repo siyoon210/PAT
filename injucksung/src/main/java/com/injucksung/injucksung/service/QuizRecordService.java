@@ -15,8 +15,7 @@ public interface QuizRecordService {
 
     QuizRecord addQuizRecord(Long[] bookContentIds, CustomUserDetails userDetails);
 
-    // TODO: 2018-12-18 이게 과연 필요할까?
-    int modifyQuizRecordService(QuizRecord quizRecord);
+    QuizRecord modifyQuizRecordService(QuizRecord quizRecord);
 
     // TODO: 2018-12-18 이게 과연 필요할까? 
     void deleteQuizRecordService(Long id);

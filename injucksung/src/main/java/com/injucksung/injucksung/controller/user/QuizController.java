@@ -14,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -83,7 +80,7 @@ public class QuizController {
             model.addAttribute("result", nextResult.get());
             viewName = "/users/quiz/solving";
         } else {
-            model.addAttribute("quizRecord", quizRecord);
+            model.addAttribute("quizRecord", quizRecordService.modifyQuizRecordService(quizRecord));
             model.addAttribute("results", results);
             viewName = "/users/quiz/result";
         }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -104,12 +105,16 @@ public class QuizRecordServiceImpl implements QuizRecordService {
         return title.toString();
     }
 
-
-
-
-    // TODO: 2018-12-18 이게 과연 필요할까?
-    public int modifyQuizRecordService(QuizRecord quizRecord) {
-        return 0;
+    @Transactional
+    @Override
+    public QuizRecord modifyQuizRecordService(QuizRecord quizRecord) {
+        Optional<QuizRecord> byId = quizRecordRepository.findById(quizRecord.getId());
+        QuizRecord quizRecordById = null;
+        if(byId.isPresent()) {
+            quizRecordById = byId.get();
+            quizRecordById.setDone(true);
+        }
+        return quizRecordRepository.save(quizRecordById);
     }
 
     // TODO: 2018-12-18 이게 과연 필요할까? 
