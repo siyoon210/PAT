@@ -36,7 +36,9 @@ public class QuizController {
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
             QuizRecord quizRecord = quizRecordService.addQuizRecord(selectedBookContentForQuizForm.getBookContentIds(), userDetails);
-            resultService.addResult(selectedBookContentForQuizForm.getBookContentIds(), quizRecord);
+            List<Result> results = resultService.addResult(selectedBookContentForQuizForm.getBookContentIds(), quizRecord);
+            model.addAttribute("question", results.get(0).getQuestion());
+            model.addAttribute("result", results.get(0));
 
             viewName = "/users/quiz/solving";
         } else {
@@ -47,7 +49,7 @@ public class QuizController {
         return viewName;
     }
 
-    //퀴즈 종료 후 결과
+    //채점하기 제출
     @PostMapping
     public String submitQuiz(@RequestParam Map<String, String> submittedQuizInfo, Model model) {
         SubmittedQuizInfoDto submittedQuizInfoDto = new SubmittedQuizInfoDto(submittedQuizInfo);
@@ -61,6 +63,12 @@ public class QuizController {
         model.addAttribute("quizRecord", quizRecord);
         model.addAttribute("results", results);
         return "/users/quiz/result";
+    }
+
+    //문제풀기 한문제 제출하기
+    @PostMapping("/{resultId}")
+    public String checkQuestion(@RequestParam Long resultId, @RequestParam int checkedChoice){
+        return "/users/quiz/solving";
     }
 
 }

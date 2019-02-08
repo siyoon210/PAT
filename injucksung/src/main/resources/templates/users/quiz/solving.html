@@ -2,26 +2,30 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="fragments/head :: common"></th:block>
-    <th:block th:insert="fragments/head :: ajax-jquery"></th:block>
-    <title>문풀</title>
+    <th:block th:insert="fragments/head :: user-resources"></th:block>
+    <title>PAT - 문제 풀기</title>
 </head>
 <body>
-<h1>문풀</h1>
-<form>
-<th:block th:each="question : ${questions}">
-    <div>
-        <span th:text="${question.questionCategory.name}"></span>
-        <span th:text="${question.bookContent.name}"></span>
-        <span th:text="${question.bookNumber}"></span><br>
+<div id="page">
+    <th:block th:insert="fragments/nav :: user"></th:block>
+    <div class="container-wrap">
+        <div class="animate-box">
+            <span th:text="${question.bookContent.book.name}">책 이름</span><br>
+            <span th:text="${question.bookContent.name}">책 목차 이름</span><br>
+            <span th:text="${question.bookNumber}+'번 문제'"></span><br>
+            <form>
+                <input type="hidden" th:value="${result.id}"/>
+                <div>
+                    <input type="radio" th:name="${question.id}" th:value="1" required/>1
+                    <input type="radio" th:name="${question.id}" th:value="2" required/>2
+                    <input type="radio" th:name="${question.id}" th:value="3" required/>3
+                    <input type="radio" th:name="${question.id}" th:value="4" required/>4
+                    <input type="radio" th:if="${question.choiceCount}==5" th:name="${question.id}" th:value="5"
+                           required(/>5
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <input type="radio" th:name="choice+${question.id}" value="1번"/>
-        <input type="radio" th:name="choice+${question.id}" value="2번"/>
-        <input type="radio" th:name="choice+${question.id}" value="3번"/>
-        <input type="radio" th:name="choice+${question.id}" value="4번"/>
-        <input type="radio" th:if="${question.choiceCount}==5" th:name="choice+${question.id}" value="5번"/>
-    </div>
-</th:block>
-</form>
+</div>
 </body>
 </html>
