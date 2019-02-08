@@ -14,8 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,6 +40,7 @@ public class QuizController {
 
             QuizRecord quizRecord = quizRecordService.addQuizRecord(selectedBookContentForQuizForm.getBookContentIds(), userDetails);
             List<Result> results = resultService.addResult(selectedBookContentForQuizForm.getBookContentIds(), quizRecord);
+            Collections.sort(results);
             model.addAttribute("question", results.get(0).getQuestion());
             model.addAttribute("result", results.get(0));
 
@@ -67,8 +71,15 @@ public class QuizController {
 
     //문제풀기 한문제 제출하기
     @PostMapping("/{resultId}")
-    public String checkQuestion(@RequestParam("checkedChoice") int checkedChoice, @PathVariable Long resultId) {
-        
+    public String checkQuestion(@RequestParam("checkedChoice") int checkedChoice, @PathVariable Long resultId, Model model) {
+        QuizRecord quizRecord = resultService.checkQuestion(resultId, checkedChoice);
+        List<Result> results = resultService.getResults(quizRecord.getId());
+        Collections.sort(results);
+        Optional<Result> nextResult = results.stream().filter(result -> result.getCheckedChoice() == 0).findFirst();
+
+        model.addAttribute("question", nextResult.get().getQuestion());
+        model.addAttribute("result", nextResult.get());
+
         return "/users/quiz/solving";
     }
 

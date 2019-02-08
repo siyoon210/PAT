@@ -111,12 +111,12 @@ VALUES (2, now(), 2, 3, 0, '위포트 언어 유의어 영역');
 -- 시험기록 끝
 
 -- result
-INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice)
-VALUES (1, 1, true, 3);
-INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice)
-VALUES (1, 2, true, 5);
-INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice)
-VALUES (1, 3, false, 4);
+INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice, sequence)
+VALUES (1, 1, true, 3, 0);
+INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice, sequence)
+VALUES (1, 2, true, 5, 1);
+INSERT INTO result(quiz_record_id, question_id, is_correct, checked_choice, sequence)
+VALUES (1, 3, false, 4, 2);
 -- result 끝
 
 

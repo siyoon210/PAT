@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -34,11 +32,11 @@ public class ResultServiceImpl implements ResultService {
             Integer chosenNum = submittedQuizInfoDto.getSelectedChoices().get(question.getId());
             results.add(
                     Result.builder()
-                    .isCorrect(question.getCorrect() == chosenNum)
-                    .checkedChoice(chosenNum)
-                    .question(question)
-                    .quizRecord(quizRecord)
-                    .build());
+                            .isCorrect(question.getCorrect() == chosenNum)
+                            .checkedChoice(chosenNum)
+                            .question(question)
+                            .quizRecord(quizRecord)
+                            .build());
         }
 
         return resultRepository.saveAll(results);
@@ -49,16 +47,29 @@ public class ResultServiceImpl implements ResultService {
         List<Result> results = new ArrayList<>();
         List<Question> questions = questionRepository.findQuestionByBookContentId(bookContentIds);
 
-        for (Question question : questions) {
+        for (int i = 0; i < questions.size(); i++) {
             results.add(
                     Result.builder()
                             .isCorrect(false)
                             .checkedChoice(0)
-                            .question(question)
+                            .sequence(i)
+                            .question(questions.get(i))
                             .quizRecord(quizRecord)
                             .build());
         }
         return resultRepository.saveAll(results);
+    }
+
+    @Override
+    public QuizRecord checkQuestion(Long resultId, int checkedChoice) {
+        Result resultById = resultRepository.findResultById(resultId);
+        resultById.setCheckedChoice(checkedChoice);
+        if (resultById.getQuestion().getCorrect() == checkedChoice) {
+            resultById.setIsCorrect(true);
+        }
+
+        Result save = resultRepository.save(resultById);
+        return save.getQuizRecord();
     }
 
     @Override

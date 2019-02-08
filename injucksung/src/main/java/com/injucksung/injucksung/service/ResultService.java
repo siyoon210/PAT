@@ -16,6 +16,8 @@ public interface ResultService {
 
     List<Result> addResult(Long[] bookContentIds, QuizRecord quizRecord);
 
+    QuizRecord checkQuestion(Long resultId, int checkedChoice);
+
     int modifyResult(Result result);
 
     void deleteResult(Long id);

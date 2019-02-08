@@ -10,10 +10,13 @@ import javax.persistence.*;
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
 @EqualsAndHashCode
-public class Result {
+public class Result implements Comparable<Result>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private int sequence;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_record_id", nullable = false)
@@ -29,4 +32,9 @@ public class Result {
 
     @Column(length = 1, nullable = false)
     private int checkedChoice;
+
+    @Override
+    public int compareTo(Result o) {
+        return o.sequence-this.sequence;
+    }
 }
