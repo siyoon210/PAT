@@ -77,10 +77,18 @@ public class QuizController {
         Collections.sort(results);
         Optional<Result> nextResult = results.stream().filter(result -> result.getCheckedChoice() == 0).findFirst();
 
-        model.addAttribute("question", nextResult.get().getQuestion());
-        model.addAttribute("result", nextResult.get());
+        String viewName = null;
+        if (nextResult.isPresent()) {
+            model.addAttribute("question", nextResult.get().getQuestion());
+            model.addAttribute("result", nextResult.get());
+            viewName = "/users/quiz/solving";
+        } else {
+            model.addAttribute("quizRecord", quizRecord);
+            model.addAttribute("results", results);
+            viewName = "/users/quiz/result";
+        }
 
-        return "/users/quiz/solving";
+        return viewName;
     }
 
 }
