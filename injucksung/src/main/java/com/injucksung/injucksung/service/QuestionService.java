@@ -22,4 +22,6 @@ public interface QuestionService {
     Page<Question> getQuestionList(int start);
 
     Question getQuestionById(Long questionId);
+
+    List<Question> getQuestionByBookContentId(Long bookContentId);
 }

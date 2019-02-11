@@ -9,14 +9,12 @@ import com.injucksung.injucksung.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -63,7 +61,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
         //위에 적힌 제목이외에 여러 영역을 응시한 경우
         int bookContentCount = submittedQuizInfoDto.getBookContentCount();
         if (bookContentCount > 1) {
-            title.append(" 외 ").append(bookContentCount-1).append("건");
+            title.append(" 외 ").append(bookContentCount - 1).append("건");
         }
 
         return title.toString();
@@ -87,19 +85,20 @@ public class QuizRecordServiceImpl implements QuizRecordService {
 
         if (bookContentIds.length > 0) {
             //책 이름과 책목차 한가지를 생성한다.
-            Question questionById = questionService.getQuestionById(bookContentIds[0]);
+            List<Question> questionByBookContentId = questionService.getQuestionByBookContentId(bookContentIds[0]);
 
             //제일 앞에 책 이름
-            title.append(questionById.getBookContent().getBook().getName())
+            title.append(questionByBookContentId.get(0).getBookContent().getBook().getName())
                     .append(" : ")
                     //책 이름 뒤에 대표로 들어갈 책 목차 이름
-                    .append(questionById.getBookContent().getName())
+                    .append(questionByBookContentId.get(0).getBookContent().getName())
                     .append(" 영역");
+
         }
 
         //위에 적힌 제목이외에 여러 영역을 응시한 경우
         if (bookContentIds.length > 1) {
-            title.append(" 외 ").append(bookContentIds.length-1).append("건");
+            title.append(" 외 ").append(bookContentIds.length - 1).append("건");
         }
 
         return title.toString();
@@ -110,7 +109,7 @@ public class QuizRecordServiceImpl implements QuizRecordService {
     public QuizRecord modifyQuizRecordService(QuizRecord quizRecord) {
         Optional<QuizRecord> byId = quizRecordRepository.findById(quizRecord.getId());
         QuizRecord quizRecordById = null;
-        if(byId.isPresent()) {
+        if (byId.isPresent()) {
             quizRecordById = byId.get();
             quizRecordById.setDone(true);
         }

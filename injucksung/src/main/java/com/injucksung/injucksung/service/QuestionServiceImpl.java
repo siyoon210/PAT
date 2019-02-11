@@ -19,7 +19,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -86,5 +85,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Transactional(readOnly = true)
     public Question getQuestionById(Long questionId) {
         return questionRepository.findQuestionById(questionId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Question> getQuestionByBookContentId(Long bookContentId) {
+        return questionRepository.findQuestionByBookContentId(bookContentId);
     }
 }

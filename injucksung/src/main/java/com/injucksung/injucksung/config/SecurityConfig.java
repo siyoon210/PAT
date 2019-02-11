@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/resources/**", "/static/**",
                 "/admin/styles/**", "/admin/scripts/**", "/admin/images/**", "/admin/fonts/**", "/**.ico",
-                "/css/**", "/fonts/**", "/images/**", "/js/**", "/sass/**");
+                "/css/**", "/fonts/**", "/images/**", "/js/**", "/sass/**", "/**.jpg", "/**.png");
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public SpringSecurityDialect springSecurityDialect(){
+    public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
 }
