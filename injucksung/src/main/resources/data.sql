@@ -55,55 +55,55 @@ INSERT INTO user_role (user_id, role_id)
 VALUES (2, 2);
 -- 유저 끝
 
--- 문제 PDF파일 업로드, 문제 정보입력
+-- 문제 이미파일 업로드, 문제 정보입력
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 유의어 1번문제.pdf', '1234-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 유의어 1번문제.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 유의어 1번문제 해설.pdf', '3456-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 유의어 1번문제 해설.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 6, 1, 1, 1, 3, 5);
 
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 유의어 2번문제.pdf', '2334-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 유의어 2번문제.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 유의어 2번문제 해설.pdf', '3556-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 유의어 2번문제 해설.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 6, 2, 2, 2, 5, 5);
 
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 다의어 1번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 다의어 1번문제.pdf', '34dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 다의어 1번문제 해설.pdf', '6556-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 다의어 1번문제 해설.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 7, 1, 3, 3, 3, 5);
 
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 다의어 2번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 다의어 2번문제.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 다의어 2번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 다의어 2번문제 해설.pdf', '4dcce9cb-8ffe-4f90-bc16-bf6f449c783b_ff1.png', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 7, 2, 4, 4, 4, 5);
 
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 단어관계 1번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 단어관계 1번문제.pdf', '3554-5678-1234-5678', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 단어관계 1번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 단어관계 1번문제 해설.pdf', '1236-6678-3456-6678', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 8, 1, 5, 5, 3, 5);
 
 INSERT INTO content_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 단어관계 2번문제.pdf', '3554-5678-1234-5678', 'PDF', '100', now(), '/file/....');
+VALUES ('위프트 언어 단어관계 2번문제.pdf', '3554-5678-1234-5678', 'image/png', '100', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO explanation_file (origin_name, saved_name, type, length, reg_date, path)
-VALUES ('위프트 언어 단어관계 2번문제 해설.pdf', '1236-6678-3456-6678', 'PDF', '120', now(), '/file/....');
+VALUES ('위프트 언어 단어관계 2번문제 해설.pdf', '1236-6678-3456-6678', 'image/png', '120', now(), '/home/siyoon/tmp/pat/2019/02/11');
 INSERT INTO question (question_category_id, book_content_id, book_number, content_file_id, explanation_file_id, correct,
                       choice_count)
 VALUES (4, 8, 2, 6, 6, 4, 5);
--- 문제 PDF파일 업로드, 문제 정보입력
+-- 문제 이미지파일 업로드, 문제 정보입력
 
 -- 시험기록 QuizRecord
 INSERT INTO quiz_record (user_id, date, correct_count, total_count, is_done, title)
