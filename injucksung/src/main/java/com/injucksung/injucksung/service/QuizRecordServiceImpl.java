@@ -115,9 +115,4 @@ public class QuizRecordServiceImpl implements QuizRecordService {
         }
         return quizRecordRepository.save(quizRecordById);
     }
-
-    // TODO: 2018-12-18 이게 과연 필요할까? 
-    public void deleteQuizRecordService(Long id) {
-
-    }
 }

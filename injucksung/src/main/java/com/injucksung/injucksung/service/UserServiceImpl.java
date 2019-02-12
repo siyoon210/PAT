@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public User login(String email, String password) {
-        // TODO: 18. 12. 17 세션에 저장해야 된다.
         return userRepository.findUserByEmailAndPassword(email, password);
     }
 
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public String findPassword(String email) {
-        // TODO: 18. 12. 17 이건 비번 알려주는게 안되니 비번을 변경하게 바꿔줘야 한다.
+        // TODO: 18. 12. 17 이건 비번 알려주는게 안되니 비번을 변경하고 알려줘야 한다.
         return userRepository.findUserByEmail(email).getPassword();
     }
 

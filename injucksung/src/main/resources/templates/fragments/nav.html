@@ -10,7 +10,6 @@
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
-                        <!-- TODO 권한검사 & 동적으로 class="active" 설정하기-->
                         <!--<li class="active"><a th:href="@{/}">Home</a></li>-->
                         <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"></span></li>
                         <li><a th:href="@{/}">Home</a></li>

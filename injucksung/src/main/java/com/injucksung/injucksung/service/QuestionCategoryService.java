@@ -11,7 +11,4 @@ public interface QuestionCategoryService {
     int modifyQuestionCategory(QuestionCategory questionCategory);
 
     Page<QuestionCategory> getQuestionCategoryList(int start);
-
-    //TODO:문제 카테고리 검색 기능이 굳이 필요할까?
-//    PageSize<QuestionCategory> getQuestionCategoryList(int start, String searchType, String searchWord);
 }
