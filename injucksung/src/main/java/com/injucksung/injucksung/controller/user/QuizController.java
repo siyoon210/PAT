@@ -38,7 +38,6 @@ public class QuizController {
             List<Result> results = resultService.addResult(selectedBookContentForQuizForm.getBookContentIds(), quizRecord);
             Collections.sort(results);
             model.addAttribute("question", results.get(0).getQuestion());
-            model.addAttribute("contentFile", results.get(0).getQuestion().getContentFile());
             model.addAttribute("result", results.get(0));
 
             viewName = "/users/quiz/solving";
@@ -78,7 +77,6 @@ public class QuizController {
         if (nextResult.isPresent()) {
             model.addAttribute("question", nextResult.get().getQuestion());
             model.addAttribute("result", nextResult.get());
-            model.addAttribute("contentFile", nextResult.get().getQuestion().getContentFile());
             viewName = "/users/quiz/solving";
         } else {
             model.addAttribute("quizRecord", quizRecordService.modifyQuizRecordService(quizRecord));
