@@ -1,0 +1,9 @@
+spring.profiles.active=local
+spring.mvc.static-path-pattern=/resources/**
+spring.thymeleaf.enabled=true
+spring.thymeleaf.cache=false
+spring.thymeleaf.encoding=UTF-8
+
+
+cloud.aws.s3.bucket=pat-webservice-s3
+cloud.aws.region.static=ap-northeast-2
