@@ -1,10 +1,6 @@
 package com.injucksung.injucksung.dto;
 
-import com.injucksung.injucksung.domain.ContentFile;
-import com.injucksung.injucksung.domain.ExplanationFile;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data

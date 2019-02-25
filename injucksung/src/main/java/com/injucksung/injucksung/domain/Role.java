@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "role")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class
 Role {
     @Id

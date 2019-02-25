@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity @Table(name = "quiz_record")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class QuizRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

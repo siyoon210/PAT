@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity @Table(name = "result")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class Result implements Comparable<Result>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,12 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @EnableConfigurationProperties({
-		FileStorageProperties.class
+        FileStorageProperties.class
 })
 @SpringBootApplication
 public class InjucksungApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(InjucksungApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(InjucksungApplication.class, args);
+    }
 }
+

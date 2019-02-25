@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
