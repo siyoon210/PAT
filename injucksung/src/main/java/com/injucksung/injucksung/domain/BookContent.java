@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class BookContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,7 +13,7 @@
             <span th:text="${question.bookContent.book.name}">책 이름</span><br>
             <span th:text="${question.bookContent.name}">책 목차 이름</span><br>
             <span th:text="${question.bookNumber}+'번 문제'"></span><br>
-            <img th:src="${contentFile.path}+'/'+${contentFile.savedName}" th:alt="${contentFile.originName}"/>
+            <img th:src="${contentFile.path}" th:alt="${contentFile.originName}"/>
             <form method="POST" th:action="'/quiz/'+${result.id}">
                 <input type="hidden" th:value="${result.id}"/>
                 <div>

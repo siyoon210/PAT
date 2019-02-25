@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

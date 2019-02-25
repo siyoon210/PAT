@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class ArticleContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

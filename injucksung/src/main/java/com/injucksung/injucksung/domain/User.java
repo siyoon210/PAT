@@ -9,7 +9,7 @@ import java.util.Set;
 @Entity @Table(name = "user")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

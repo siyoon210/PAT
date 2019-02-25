@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity @Table(name = "explanation_file")
 @Setter @Getter
 @NoArgsConstructor @AllArgsConstructor @Builder
-@EqualsAndHashCode
+@EqualsAndHashCode(of="id")
 public class ExplanationFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

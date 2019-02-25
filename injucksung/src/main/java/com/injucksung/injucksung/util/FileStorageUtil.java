@@ -3,6 +3,7 @@ package com.injucksung.injucksung.util;
 import com.injucksung.injucksung.domain.ContentFile;
 import com.injucksung.injucksung.domain.ExplanationFile;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,29 +15,15 @@ import java.util.Arrays;
 import java.util.UUID;
 
 @Slf4j
+@Component
 public class FileStorageUtil {
-    public static ContentFile uploadContentFile(String uploadPath, MultipartFile multipartFile) throws IOException {
-
-        //겹쳐지지 않는 파일명을 위한 유니크한 값 생성
-        UUID uid = UUID.randomUUID();
-
-        //원본파일 이름과 UUID 결합
-        String savedName = uid.toString() + "_" + multipartFile.getOriginalFilename();
+    public ContentFile uploadContentFile(String uploadPath, MultipartFile multipartFile) throws IOException {
+        String savedName = getSaveName(multipartFile);
 
         //파일을 저장할 폴더 생성(년 월 일 기준)
         String savedPath = calcPath(uploadPath);
 
-        //저장할 파일준비
-        File target = new File(savedPath, savedName);
-
-        /*log.info("-------- saved file info --------");
-        log.info("upload path : " + uploadPath);
-        log.info("file name : " + savedName);
-        log.info("file path : " + savedPath);
-        log.info("file length : " + multipartFile.getSize());*/
-
-        //파일을 저장
-        FileCopyUtils.copy(multipartFile.getBytes(), target);
+        saveFile(multipartFile, savedName, savedPath);
 
         //uploadedFileName는 썸네일명으로 화면에 전달된다.
         return ContentFile.builder()
@@ -49,28 +36,31 @@ public class FileStorageUtil {
                 .build();
     }
 
-    public static ExplanationFile uploadExplanationFile(String uploadPath, MultipartFile multipartFile) throws IOException {
+    private void saveFile(MultipartFile multipartFile, String savedName, String savedPath) throws IOException {
+        //저장할 파일준비
+        File target = new File(savedPath, savedName);
 
+        //파일을 저장
+        FileCopyUtils.copy(multipartFile.getBytes(), target);
+    }
+
+    private String getSaveName(MultipartFile multipartFile) {
         //겹쳐지지 않는 파일명을 위한 유니크한 값 생성
         UUID uid = UUID.randomUUID();
 
         //원본파일 이름과 UUID 결합
-        String savedName = uid.toString() + "_" + multipartFile.getOriginalFilename();
+        return uid.toString() + "_" + multipartFile.getOriginalFilename();
+    }
+
+    public ExplanationFile uploadExplanationFile(String uploadPath, MultipartFile multipartFile) throws IOException {
+
+        //겹쳐지지 않는 파일명을 위한 유니크한 값 생성
+        String savedName = getSaveName(multipartFile);
 
         //파일을 저장할 폴더 생성(년 월 일 기준)
         String savedPath = calcPath(uploadPath);
 
-        //저장할 파일준비
-        File target = new File(savedPath, savedName);
-
-        /*log.info("-------- saved file info --------");
-        log.info("upload path : " + uploadPath);
-        log.info("file name : " + savedName);
-        log.info("file path : " + savedPath);
-        log.info("file length : " + multipartFile.getSize());*/
-
-        //파일을 저장
-        FileCopyUtils.copy(multipartFile.getBytes(), target);
+        saveFile(multipartFile, savedName, savedPath);
 
         //uploadedFileName는 썸네일명으로 화면에 전달된다.
         return ExplanationFile.builder()
@@ -85,7 +75,7 @@ public class FileStorageUtil {
 
     //폴더 생성 함수
     @SuppressWarnings("unused")
-    private static String calcPath(String uploadPath) {
+    private String calcPath(String uploadPath) {
 
         LocalDateTime ldt = LocalDateTime.now();
         String yearPath = File.separator + ldt.getYear();
@@ -97,7 +87,7 @@ public class FileStorageUtil {
     }//calcPath
 
     //폴더 생성 함수
-    private static void makeDir(String uploadPath, String... paths) {
+    private void makeDir(String uploadPath, String... paths) {
 
         if (new File(uploadPath + paths[paths.length - 1]).exists()) {
             return;
