@@ -45,7 +45,7 @@ public class BookContentServiceImpl implements BookContentService {
         }
 
         //sequence 설정
-        if(bookContentId != null){
+        if (bookContentId != null) {
             int maxSequenceByBookIdAndDepth;
             try {
                 maxSequenceByBookIdAndDepth = bookContentRepository.findMaxSequenceBySuperBookContentId(bookContentId) + 1;
@@ -89,37 +89,40 @@ public class BookContentServiceImpl implements BookContentService {
     @Override
     @Transactional
     public BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId) {
-        //TODO : 현재는 sequence 조정만 구현
-        BookContent bookContent = null;
-        if (bookContentForm.getSequenceDirection() != null) {
-            bookContent = bookContentRepository.findBookContentById(bookContentId);
+        return null;
+    }
 
-            int sequence = 0;
-            switch (bookContentForm.getSequenceDirection()) {
-                case "up":
-                    sequence = bookContent.getSequence() - 1;
-                    break;
-                case "down":
-                    sequence = bookContent.getSequence() + 1;
-                    break;
-            }
+    @Override
+    @Transactional
+    public BookContent modifyBookContent(String sequenceDirection, Long bookContentId) {
+        BookContent bookContent = bookContentRepository.findBookContentById(bookContentId);
 
-            BookContent bookContentBySequence;
-            BookContent superBookContent = bookContent.getSuperBookContent();
-            if (superBookContent != null) {
-                bookContentBySequence =
-                        bookContentRepository.findBookContentBySuperBookContentIdAndSequence(
-                                bookContent.getSuperBookContent().getId(),
-                                sequence);
-            } else {
-                bookContentBySequence =
-                        bookContentRepository.findBookContentByBookIdAndSequenceAndDepthEqualsZero(
-                                bookContent.getBook().getId(),
-                                sequence);
-            }
-
-            swapSequence(bookContent, bookContentBySequence);
+        int sequence = 0;
+        switch (sequenceDirection) {
+            case "up":
+                sequence = bookContent.getSequence() - 1;
+                break;
+            case "down":
+                sequence = bookContent.getSequence() + 1;
+                break;
         }
+
+        BookContent bookContentBySequence;
+        BookContent superBookContent = bookContent.getSuperBookContent();
+        if (superBookContent != null) {
+            bookContentBySequence =
+                    bookContentRepository.findBookContentBySuperBookContentIdAndSequence(
+                            bookContent.getSuperBookContent().getId(),
+                            sequence);
+        } else {
+            bookContentBySequence =
+                    bookContentRepository.findBookContentByBookIdAndSequenceAndDepthEqualsZero(
+                            bookContent.getBook().getId(),
+                            sequence);
+        }
+
+        swapSequence(bookContent, bookContentBySequence);
+
         return bookContent;
     }
 

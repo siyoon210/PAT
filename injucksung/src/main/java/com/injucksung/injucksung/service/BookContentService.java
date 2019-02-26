@@ -12,6 +12,8 @@ public interface BookContentService {
 
     BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId);
 
+    BookContent modifyBookContent(String sequenceDirection, Long bookContentId);
+
     List<BookContent> getBookContentList(Long bookId);
 
     BookContent getBookContent(Long bookContentId);

@@ -38,7 +38,7 @@ public class BookContentController {
     @GetMapping("/{bookContentId}")
     @ResponseBody
     public BookContent modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
-        System.out.println("방향은 : "+sequenceDirection);
+        bookContentService.modifyBookContent(sequenceDirection, bookContentId);
         BookContent bookContent = bookContentService.getBookContent(1L);
         return bookContent;
     }
