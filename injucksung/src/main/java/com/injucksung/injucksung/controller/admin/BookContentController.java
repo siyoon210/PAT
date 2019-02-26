@@ -28,10 +28,18 @@ public class BookContentController {
     }
 
     //책 목차 수정하기
-    @PutMapping("/{bookContentId}")
+//    @PutMapping("/{bookContentId}")
+//    @ResponseBody
+//    public BookContent modifyBookContent(@PathVariable Long bookContentId, @ModelAttribute BookContentForm bookContentForm) {
+//        BookContent bookContent = bookContentService.modifyBookContent(bookContentForm, bookContentId);
+//        return bookContent;
+//    }
+
+    @GetMapping("/{bookContentId}")
     @ResponseBody
-    public BookContent modifyBookContent(@PathVariable Long bookContentId, @ModelAttribute BookContentForm bookContentForm) {
-        BookContent bookContent = bookContentService.modifyBookContent(bookContentForm, bookContentId);
+    public BookContent modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
+        System.out.println("방향은 : "+sequenceDirection);
+        BookContent bookContent = bookContentService.getBookContent(1L);
         return bookContent;
     }
 }

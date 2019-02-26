@@ -91,7 +91,8 @@
                                     <th:block th:each="bookContent : ${bookContentList}">
                                         <tr th:id="'bookContent'+${bookContent.id}">
                                             <td>
-                                                <span><th:block th:each="index:${#numbers.sequence(0,bookContent.depth)}"
+                                                <span><th:block
+                                                        th:each="index:${#numbers.sequence(0,bookContent.depth)}"
                                                         th:if="${index}&gt;0">└</th:block></span>
                                                 <a th:text="${bookContent.name}"></a></td>
                                             <td th:text="${bookContent.isMockTest}" style="text-align: center"></td>
@@ -108,21 +109,27 @@
                                                 <form th:method="delete"
                                                       th:action="@{'/admin/book-contents/'+${bookContent.id}}">
                                                     <input type="hidden" name="bookId" th:value="${book.id}"/>
-                                                    <button type="submit" class="mb-2 btn btn-outline-danger">삭제</button>
+                                                    <button type="submit" class="mb-2 btn btn-outline-danger">삭제
+                                                    </button>
                                                 </form>
                                             </td>
                                             <td style="text-align: center">
-                                                <form th:method="put"
-                                                      th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                                                    <input type="hidden" name="sequenceDirection" th:value="up"/>
-                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">△</button>
-                                                </form>
+                                                <!--<form th:method="put"-->
+                                                <!--th:action="@{'/admin/book-contents/'+${bookContent.id}}">-->
+                                                <!--<input type="hidden" name="sequenceDirection" th:value="up"/>-->
+                                                <!--<button type="submit" class="mb-2 btn btn-outline-secondary">△</button>-->
+                                                <!--</form>-->
+                                                <input type="button"
+                                                       th:onclick="'modifyBookContentSequence('+${bookContent.id}+',\'up\')'"
+                                                       th:value="UP"
+                                                       class="mb-2 btn btn-outline-secondary"/>
                                             </td>
                                             <td style="text-align: center">
                                                 <form th:method="put"
                                                       th:action="@{'/admin/book-contents/'+${bookContent.id}}">
                                                     <input type="hidden" name="sequenceDirection" th:value="down"/>
-                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">▽</button>
+                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">▽
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -132,7 +139,8 @@
                                 </table>
 
                                 <input type="button" value="대분류 추가하기"
-                                       th:onclick="'fetchBookContentForm('+${book.id}+')'" class="mb-2 btn btn-outline-primary"/>
+                                       th:onclick="'fetchBookContentForm('+${book.id}+')'"
+                                       class="mb-2 btn btn-outline-primary"/>
                                 <div id="bookContentForm"></div>
                             </div>
                         </div>
@@ -172,6 +180,19 @@
                 document.querySelector('#bookContent' + bookContentId).insertAdjacentHTML("afterend", text);
             })//TODO: catch문
         })
+    }
+
+    function modifyBookContentSequence(bookContentId, sequenceDirection) {
+        fetch('/admin/book-contents/' + bookContentId + '?'+ $.param({
+            sequenceDirection: sequenceDirection
+        }), {
+            method: 'GET',
+            credentials: 'include'
+        }).then(function (response) {
+            response.text().then(function (text) {
+                document.querySelector('#bookContentForm').innerHTML = text;
+            })
+        }) //TODO: catch문
     }
 </script>
 </body>
