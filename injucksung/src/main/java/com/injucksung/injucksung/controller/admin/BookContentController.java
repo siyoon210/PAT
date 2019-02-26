@@ -29,8 +29,9 @@ public class BookContentController {
 
     //책 목차 수정하기
     @PutMapping("/{bookContentId}")
-    public String modifyBookContent(@PathVariable Long bookContentId, @ModelAttribute BookContentForm bookContentForm) {
+    @ResponseBody
+    public BookContent modifyBookContent(@PathVariable Long bookContentId, @ModelAttribute BookContentForm bookContentForm) {
         BookContent bookContent = bookContentService.modifyBookContent(bookContentForm, bookContentId);
-        return "redirect:/admin/books/" + bookContent.getBook().getId();
+        return bookContent;
     }
 }

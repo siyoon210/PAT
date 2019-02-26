@@ -1,6 +1,7 @@
 package com.injucksung.injucksung.domain;
 
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
