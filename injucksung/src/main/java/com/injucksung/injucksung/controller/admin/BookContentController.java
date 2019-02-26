@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,8 +40,8 @@ public class BookContentController {
 
     @GetMapping("/{bookContentId}")
     @ResponseBody
-    public LinkedList<BookContent> modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
-        LinkedList<BookContent> bookContentLinkedList = bookContentService.modifyBookContent(sequenceDirection, bookContentId);
+    public List<BookContent> modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
+        List<BookContent> bookContentLinkedList = bookContentService.modifyBookContent(sequenceDirection, bookContentId);
         return bookContentLinkedList;
     }
 }

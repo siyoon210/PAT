@@ -13,7 +13,7 @@ public interface BookContentService {
 
     BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId);
 
-    LinkedList<BookContent> modifyBookContent(String sequenceDirection, Long bookContentId);
+    List<BookContent> modifyBookContent(String sequenceDirection, Long bookContentId);
 
     List<BookContent> getBookContentList(Long bookId);
 

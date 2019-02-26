@@ -87,7 +87,7 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody>
+                                    <tbody id="bookContentTBody">
                                     <th:block th:each="bookContent : ${bookContentList}">
                                         <tr th:id="'bookContent'+${bookContent.id}">
                                             <td>
@@ -114,23 +114,16 @@
                                                 </form>
                                             </td>
                                             <td style="text-align: center">
-                                                <!--<form th:method="put"-->
-                                                <!--th:action="@{'/admin/book-contents/'+${bookContent.id}}">-->
-                                                <!--<input type="hidden" name="sequenceDirection" th:value="up"/>-->
-                                                <!--<button type="submit" class="mb-2 btn btn-outline-secondary">△</button>-->
-                                                <!--</form>-->
                                                 <input type="button"
                                                        th:onclick="'modifyBookContentSequence('+${bookContent.id}+',\'up\')'"
                                                        th:value="UP"
                                                        class="mb-2 btn btn-outline-secondary"/>
                                             </td>
                                             <td style="text-align: center">
-                                                <form th:method="put"
-                                                      th:action="@{'/admin/book-contents/'+${bookContent.id}}">
-                                                    <input type="hidden" name="sequenceDirection" th:value="down"/>
-                                                    <button type="submit" class="mb-2 btn btn-outline-secondary">▽
-                                                    </button>
-                                                </form>
+                                                <input type="button"
+                                                       th:onclick="'modifyBookContentSequence('+${bookContent.id}+',\'down\')'"
+                                                       th:value="DOWN"
+                                                       class="mb-2 btn btn-outline-secondary"/>
                                             </td>
                                         </tr>
                                     </th:block>
@@ -182,17 +175,57 @@
         })
     }
 
+    // function modifyBookContentSequence(bookContentId, sequenceDirection) {
+    //     fetch('/admin/book-contents/' + bookContentId + '?'+ $.param({
+    //         sequenceDirection: sequenceDirection
+    //     }), {
+    //         method: 'GET',
+    //         credentials: 'include',
+    //         header: {
+    //             'Accept': 'application/json'
+    //         }
+    //     }).then(function (response) {
+    //         response.text().then(function (json) {
+    //             document.querySelector('#bookContentForm').innerHTML = text;
+    //         })
+    //     }) //TODO: catch문
+    // }
+
     function modifyBookContentSequence(bookContentId, sequenceDirection) {
-        fetch('/admin/book-contents/' + bookContentId + '?'+ $.param({
-            sequenceDirection: sequenceDirection
-        }), {
-            method: 'GET',
-            credentials: 'include'
-        }).then(function (response) {
-            response.text().then(function (text) {
-                document.querySelector('#bookContentForm').innerHTML = text;
-            })
-        }) //TODO: catch문
+        var html = '';
+
+        $.getJSON("/admin/book-contents/" + bookContentId + "?sequenceDirection=" + sequenceDirection,
+            function (list) {
+                $(list).each(
+                    function () {
+                        html += "<tr id=\"bookContent" + this.id + "\">"
+                            + "<td><a>" + this.name + "</a></td>"
+                            + "<td style=\"text-align: center\">" + this.isMockTest + "</td>"
+                            + "<td style=\"text-align: center\">" + this.recommendTime + "</td>"
+                            + "<td style=\"text-align: center\">" + this.questionCount + "</td>"
+                            + "<td style=\"text-align: center\"> <input type=\"button\""
+                            + "onclick=fetchSubBookContentForm(" + this.id + "," + this.sequence + "," + this.depth + "," + this.id + ") "
+                            + "value=\"추가\" class=\"mb-2 btn btn-outline-success\"/></td>"
+                            + "<td style=\"text-align: center\">"
+                            + "<form method=\"delete\" action=\"/admin/book-contents/" + this.id + "\"> "
+                            + "<input type=\"hidden\" name=\"bookId\" value=\"" + this.id + "\"/>"
+                            + "<button type=\"submit\" class=\"mb-2 btn btn-outline-danger\">삭제</button></form></td>"
+                            + "<td style=\"text-align: center\">"
+                            + "<input type=\"button\""
+                            + "onclick = \"modifyBookContentSequence(" + this.id + ",'up')\" "
+                            + "value='UP' class='mb-2 btn btn-outline-secondary' /></td>"
+                            + "<td style=\"text-align: center\">"
+                            + "<input type=\"button\""
+                            + "onclick = \"modifyBookContentSequence(" + this.id + ",'down')\" "
+                            + "value='DOWN' class='mb-2 btn btn-outline-secondary' /></td>"
+                            + "</tr>"
+                    }
+                );
+                // $("#secondCategoryUl").html('');
+                // $("#thirdCategoryUl").html('');
+                $("#bookContentTBody").html(html);
+
+            });
     }
 </script>
 </body>
