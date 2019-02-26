@@ -94,7 +94,7 @@ public class BookContentServiceImpl implements BookContentService {
 
     @Override
     @Transactional
-    public BookContent modifyBookContent(String sequenceDirection, Long bookContentId) {
+    public LinkedList<BookContent> modifyBookContent(String sequenceDirection, Long bookContentId) {
         BookContent bookContent = bookContentRepository.findBookContentById(bookContentId);
 
         int sequence = 0;
@@ -123,7 +123,8 @@ public class BookContentServiceImpl implements BookContentService {
 
         swapSequence(bookContent, bookContentBySequence);
 
-        return bookContent;
+        LinkedList<BookContent> bookContentByBookId = bookContentRepository.findBookContentByBookId(bookContent.getBook().getId());
+        return bookContentByBookId;
     }
 
     private void swapSequence(BookContent bookContentById, BookContent bookContentBySuperBookContentIdAndSequence) {

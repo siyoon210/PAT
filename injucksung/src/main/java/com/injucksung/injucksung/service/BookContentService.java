@@ -3,6 +3,7 @@ package com.injucksung.injucksung.service;
 import com.injucksung.injucksung.domain.BookContent;
 import com.injucksung.injucksung.dto.BookContentForm;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public interface BookContentService {
@@ -12,7 +13,7 @@ public interface BookContentService {
 
     BookContent modifyBookContent(BookContentForm bookContentForm, Long bookContentId);
 
-    BookContent modifyBookContent(String sequenceDirection, Long bookContentId);
+    LinkedList<BookContent> modifyBookContent(String sequenceDirection, Long bookContentId);
 
     List<BookContent> getBookContentList(Long bookId);
 

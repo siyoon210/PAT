@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/book-contents")
@@ -37,9 +39,8 @@ public class BookContentController {
 
     @GetMapping("/{bookContentId}")
     @ResponseBody
-    public BookContent modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
-        bookContentService.modifyBookContent(sequenceDirection, bookContentId);
-        BookContent bookContent = bookContentService.getBookContent(1L);
-        return bookContent;
+    public LinkedList<BookContent> modifyBookContent(@PathVariable Long bookContentId, @RequestParam(value = "sequenceDirection") String sequenceDirection) {
+        LinkedList<BookContent> bookContentLinkedList = bookContentService.modifyBookContent(sequenceDirection, bookContentId);
+        return bookContentLinkedList;
     }
 }
